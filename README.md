@@ -1,6 +1,6 @@
 # Smart GitHub Project Reviewer
 
-An AI-powered, Retrieval-Augmented Generation (RAG) codebase analyzer that clones, indexes, and reviews GitHub repositories. The application generates structured summaries, architecture flowcharts, code quality reports, security audits, test plan recommendations, and custom resume/interview preparation materials to evaluate internship readiness.
+An AI-powered, Retrieval-Augmented Generation (RAG) codebase analyzer that clones, indexes, and reviews GitHub repositories. The application generates structured summaries, code quality reports, security audits, test plan recommendations, and custom interview preparation materials to evaluate internship readiness.
 
 ---
 
@@ -8,20 +8,8 @@ An AI-powered, Retrieval-Augmented Generation (RAG) codebase analyzer that clone
 
 * **Automated Codebase Indexing:** Clones public Git repositories shallowly (`depth=1`), scans and filters files recursively, and processes code context in memory.
 * **Retrieval-Augmented Generation (RAG):** Employs **FAISS (Facebook AI Similarity Search)** vector storage and **Google Gemini Embeddings (`gemini-embedding-001`)** to enable semantic code search and context retrieval.
-* **Core Repository Review:** Analyzes repository purpose, detects tech stacks, identifies architectural design styles (MVC, layered, monolith), evaluates code smells, audits security postures, and suggests README layout enhancements.
+* **Core Repository Review:** Analyzes repository purpose, detects tech stacks, evaluates code smells, audits security postures, and suggests README layout enhancements.
 * **Internship Readiness Evaluation:** Computes an internship-readiness scorecard, generates polished resume project bullets, drafts 30-second elevator pitches, and provides mock technical interview Q&A lists.
-
----
-
-## 🛠️ Technical Optimizations & Engineering Depth
-
-Under the hood, the application is heavily optimized to run on strict free-tier API quotas (e.g., 5 RPM, 250k TPM, and 20 RPD):
-
-* **Structured Request Consolidation:** Redesigned legacy sequential pipelines by consolidating 10 separate API chains into **exactly 2 structured requests** utilizing LangChain's native Pydantic validation (`with_structured_output`). This yielded an **80% reduction in daily quota consumption**.
-* **Tokens Per Minute (TPM) Optimization:** Implemented a compact 800-character Recursive Text Chunker and dynamic retriever limits ($k = 10$). This reduced the input token count sent to the LLM from ~5,000 down to **~1,800 tokens** per analysis run (a **64% reduction in TPM usage**).
-* **Automated Disk Cleanup:** Built filesystem routines that dynamically delete cloned repository code on disk immediately after the in-memory vector database is generated. Included custom permission-override handlers to safely delete Windows read-only `.git` pack files.
-* **Time-Based Session Pruning:** Runs an event-driven routine on startup to garbage-collect and delete stale session vector databases older than 24 hours.
-* **Rate-Limit Resiliency:** Configured exponential backoff retries (`max_retries = 5`) within LangChain to gracefully handle transient 503 capacity issues.
 
 ---
 
