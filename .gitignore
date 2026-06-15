@@ -1,0 +1,35 @@
+# Private environment variables containing API keys
+.env
+.env.local
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Application runtime cache and database directories
+temp_repos/
+vectorstores/
+reports/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
