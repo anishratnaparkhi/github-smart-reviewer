@@ -7,7 +7,7 @@ TEMP_REPOS_DIR = BASE_DIR / "temp_repos"
 REPORTS_DIR = BASE_DIR / "reports"
 VECTOR_STORE_DIR = BASE_DIR / "vectorstores"
 
-load_dotenv(BASE_DIR / ".env")
+load_dotenv(BASE_DIR / ".env")   # By default, load_dotenv() searches relative to the command prompt's active directory
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "google")
