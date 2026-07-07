@@ -9,7 +9,7 @@ from app.utils.file_filter import(
 def count_lines(file_path: Path) -> int:
     try:
         with file_path.open("r", encoding="utf-8", errors="ignore") as file:
-            return sum(1 for _ in file)
+            return sum(1 for _ in file)  # the sum apprach is memory efficient as it does not load the entire file into memory rather iterates over the file line by line.
     except OSError:
         return 0
 
@@ -18,7 +18,7 @@ def scan_repository(repo_path: Path) -> dict:
     skipped_files = []
     total_files_scanned = 0
 
-    for file_path in repo_path.rglob("*"):
+    for file_path in repo_path.rglob("*"):   # rglob is used to recursively search for files in the repository. * matches all the files and directories.
         if file_path.is_dir():
             continue
 

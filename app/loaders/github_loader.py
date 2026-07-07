@@ -25,8 +25,12 @@ def clone_github_repo(repo_url:str) -> dict:
     target_dir = TEMP_REPOS_DIR / session_id / repo_name
     target_dir.parent.mkdir(parents=True, exist_ok=True)
 
+    # setting the parameter parents = True allows to make intermediate directories in the path if they do not exist. exist_ok = True allows to avoid raising an error if the directory already exists.
+
     try:
         Repo.clone_from(normalized_url, target_dir, depth=1)
+
+    # depth = 1 allows us to create a shallow copy of only the latest commit of the repository, saving disk space.
     
     except GitCommandError as exc:
         remove_directory(target_dir.parent)
